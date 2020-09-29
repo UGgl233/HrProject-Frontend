@@ -1,0 +1,166 @@
+<br />
+<br />
+<div class="container">
+  <h1>Please select your Visa Status</h1>
+  <br />
+  <form (ngSubmit)="onUpload()">
+    <ng-container>
+      <select
+        class="form-control"
+        [(ngModel)]="selectedOption"
+        [ngModelOptions]="{ standalone: true }"
+        (change)="onChooseVisaStatus(visa)"
+      >
+        <option
+          *ngFor="let visa of visaStatus"
+          [ngValue]="visa.id"
+          selected="selectedOption"
+        >
+          {{ visa.text }}
+        </option>
+      </select>
+
+      <br />
+      <div [ngSwitch]="selectedOption">
+        <div *ngSwitchCase="1">
+          <div class="col-md-12">
+            <h4>Please upload a copy of your OPT EAD</h4>
+            <div class="form-group">
+              <label for="exampleFormControlFile1">upload here</label>
+              <input
+                type="file"
+                name="file"
+                multiple
+                class="form-control-file"
+                id="exampleFormControlFile1"
+                (change)="selectFile($event)"
+              />
+            </div>
+
+            <div class="alert alert-light" role="alert">{{ message }}</div>
+          </div>
+        </div>
+        <div *ngSwitchCase="2">
+          <h4>
+            After enter your OPT date, please download example and fill your
+            I-983 form
+          </h4>
+          <hr />
+          <div class="form-group">
+            <br />
+            <label for="date">Please enter your OPT Expiration Date: </label
+            ><br />
+
+            <div>
+              <mat-form-field>
+                <mat-label>OPT Expiration Date</mat-label>
+                <input
+                  #thenBlock
+                  matInput
+                  [matDatepicker]="dob"
+                  [(ngModel)]="dateOfBirth"
+                  name="dateOfBirth"
+                  [ngModelOptions]="{ standalone: true }"
+                  required
+                  (dateChange)="updateDOB(dateOfBirth)"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="dob"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #dob></mat-datepicker> </mat-form-field
+              ><br />
+              {{ dateOfBirth }}
+            </div>
+            <hr />
+            <div *ngIf="result === true">
+              <h4>Please download sample I-983 Form and fill I-983 Form</h4>
+              <div class="sample">
+                <h4>
+                  Please see sample form
+                  <a
+                    href="https://drive.google.com/uc?export=download&id=15BN55SUMYpd5nO05-Hyr9E3G3IJwlDYo"
+                    >here</a
+                  >
+                </h4>
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlFile1">upload here</label>
+                <input
+                  type="file"
+                  name="file"
+                  class="form-control-file"
+                  id="exampleFormControlFile1"
+                  (change)="selectFile($event)"
+                />
+              </div>
+              <div class="alert alert-light" role="alert">{{ message }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngSwitchCase="3">
+          <div class="col-md-12">
+            <h4>Please upload a copy of your OPT Receipt</h4>
+            <div class="form-group">
+              <label for="exampleFormControlFile1">upload here</label>
+              <input
+                type="file"
+                name="file"
+                [(ngModel)]="currentFileName"
+                multiple
+                class="form-control-file"
+                id="exampleFormControlFile1"
+                (change)="selectFile($event)"
+              />
+            </div>
+
+            <div class="alert alert-light" role="alert">{{ message }}</div>
+          </div>
+        </div>
+        <div *ngSwitchCase="4">
+          <div class="col-md-12">
+            <h4>Please upload a copy of your OPT STEAM EAD</h4>
+            <div class="form-group">
+              <label for="exampleFormControlFile1">upload here</label>
+              <input
+                type="file"
+                name="file"
+                multiple
+                class="form-control-file"
+                id="exampleFormControlFile1"
+                (change)="selectFile($event)"
+              />
+            </div>
+
+            <div class="alert alert-light" role="alert">{{ message }}</div>
+          </div>
+        </div>
+      </div>
+
+      <br />
+
+      <button
+        #button
+        type="submit"
+        class="btn btn-primary"
+        id="btnUpload"
+        [disabled]="!selectedFiles"
+        (click)="onSaveDocument()"
+      >
+        Upload
+      </button>
+      <br />
+    </ng-container>
+  </form>
+  <br />
+  <button
+        #button
+        class="btn btn-primary"
+        (click)="routeToDownloadFile()"
+      >
+        Find Documents you uploaded
+      </button>
+</div>
+<br /><br />
+<router-outlet></router-outlet>

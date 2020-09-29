@@ -1,0 +1,43 @@
+<br />
+<br />
+<div class="container">
+  <form [formGroup]="preOnboardForm" (ngSubmit)="nextStep()">
+    <div class="form-group">
+      <label>User Name:</label>
+      <input type="text" class="form-control" formControlName="username" />
+    </div>
+    <div class="form-group">
+      <label>Email address</label>
+      <input type="email" class="form-control" formControlName="email" />
+      <small id="emailHelp" class="form-text text-muted"
+        >We'll never share your email with anyone else.</small
+      >
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control" formControlName="password" />
+    </div>
+    <div class="form-group">
+      <label>Registration Token:</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="registrationToken"
+      />
+    </div>
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="preOnboardForm.invalid"
+    >
+      Next Step
+    </button>
+  </form>
+  &nbsp;
+  <p>
+    <button class="btn btn-primary" (click)="generateToken()">
+      Notify HR to Generate Token
+    </button>
+    <a *ngIf="tokenGenerateFlag">Notified</a>
+  </p>
+</div>

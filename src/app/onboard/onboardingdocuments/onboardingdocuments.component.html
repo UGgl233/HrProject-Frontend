@@ -1,0 +1,74 @@
+<br />
+<br />
+<div class="container">
+  <div class="component-container">
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+      <h2>Please sign and upload the following documents:</h2>
+
+      <div>
+        <label>Document 1: </label>
+        <a
+          class="download-btn"
+          (click)="getImage('document1')"
+          style="cursor: pointer"
+          >Download</a
+        >
+        <div style="margin: 10px 0px">
+          Submit Document:
+          <input
+            type="file"
+            id="name"
+            placeholder="image name"
+            formControlName="document1"
+            name="name"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label>Document 2: </label>
+        <a
+          class="download-btn"
+          (click)="getImage('document2')"
+          style="cursor: pointer"
+          >Download</a
+        >
+        <div style="margin: 10px 0px">
+          Submit Document:
+          <input
+            type="file"
+            id="name"
+            placeholder="image name"
+            formControlName="document2"
+            name="name"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label>Document 3: </label>
+        <a
+          class="download-btn"
+          (click)="getImage('document3')"
+          style="cursor: pointer"
+          >Download</a
+        >
+        <div style="margin: 10px 0px">
+          Submit Document:
+          <input
+            type="file"
+            id="name"
+            placeholder="image name"
+            formControlName="document3"
+            name="name"
+          />
+        </div>
+      </div>
+
+      <br />
+      <div style="margin: 10px 0px">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>

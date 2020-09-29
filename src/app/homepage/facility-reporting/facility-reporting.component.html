@@ -1,0 +1,59 @@
+<div class="component-container">
+  <div class="reporting-div">
+    <h2>Report Facility</h2>
+    <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+      <div>
+        <label for="reportTitle">Title: </label>
+        <div class="form-group">
+          <input
+            class="form-control"
+            type="text"
+            name="reportTitle"
+            id="reportTitle"
+            formControlName="title"
+          />
+        </div>
+      </div>
+      <div>
+        <label for="reportDescription">Description: </label>
+        <div class="form-group">
+          <input
+            class="form-control"
+            type="text"
+            name="reportDescription"
+            id="reportDescription"
+            formControlName="description"
+          />
+        </div>
+      </div>
+      <div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="list-div" *ngIf="!isLoaded; else elseBlock">
+    <h2>Exisitng report(s):</h2>
+    <table>
+      <div>
+        <tr>
+          <th>Title</th>
+          <th>Created By</th>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Status</th>
+        </tr>
+        <tr *ngFor="let report of facilityReports; let i = index">
+          <td>{{ report.title }}</td>
+          <td>{{ report.createdBy }}</td>
+          <td>{{ report.date }}</td>
+          <td>{{ report.description }}</td>
+          <td>{{ report.status }}</td>
+        </tr>
+      </div>
+    </table>
+  </div>
+  <ng-template #elseBlock>
+    <p>!Wait!</p>
+  </ng-template>
+</div>

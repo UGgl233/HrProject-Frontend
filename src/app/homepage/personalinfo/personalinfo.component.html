@@ -1,0 +1,231 @@
+<div class="container">
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <!-- <div *ngFor="let info of InfoSample"> -->
+    <p>
+      <button (click)="enableEdit()">edit</button>
+    </p>
+
+    <p>
+      <button (click)="printName()">print name log</button>
+    </p>
+
+    <p>
+      <button (click)="sendToAPI()">save</button>
+    </p>
+    <p>
+      <button (click)="onCancel()">Cancel</button>
+    </p>
+
+    <div
+      *ngIf="profileForm.dirty || profileForm.touched"
+      class="alert alert-danger"
+    >
+      <p>
+        <button (click)="cancel()">cancel</button>
+      </p>
+    </div>
+
+    <div class="row">
+      <div class="column">
+        <h2>Name</h2>
+        <label>
+          Name:
+          <input type="text" formControlName="name" required />
+        </label>
+
+        <label>
+          Preferred Name:
+          <input formControlName="preferredName" />
+        </label>
+
+        <label>
+          Avatar:
+          <input type="text" formControlName="avatar" />
+        </label>
+
+        <label>
+          Date of Birth:
+          <input type="text" formControlName="dob" />
+        </label>
+
+        <label>
+          Age:
+          <input type="text" formControlName="age" />
+        </label>
+
+        <label>
+          Gender:
+          <input type="text" formControlName="gender" />
+        </label>
+
+        <label>
+          SSN:
+          <input type="text" formControlName="ssn" />
+        </label>
+      </div>
+
+      <div class="column">
+        <h2>Address</h2>
+        <div>
+          <h3>Primary Address</h3>
+
+          <label>
+            Address Line 1:
+            <input type="text" formControlName="primaryAddressLine1" />
+          </label>
+
+          <label>
+            Address Line 2:
+            <input type="text" formControlName="primaryAddressLine2" />
+          </label>
+
+          <label>
+            City:
+            <input type="text" formControlName="primaryAddressCity" />
+          </label>
+
+          <label>
+            State:
+            <input type="text" formControlName="primaryAddressState" />
+          </label>
+
+          <label>
+            Zip Code:
+            <input type="text" formControlName="primaryAddressZip" />
+          </label>
+        </div>
+
+        <div>
+          <h3>Second Address</h3>
+
+          <label>
+            Address Line 1:
+            <input type="text" formControlName="secondAddressLine1" />
+          </label>
+
+          <label>
+            Address Line 2:
+            <input type="text" formControlName="secondAddressLine2" />
+          </label>
+
+          <label>
+            City:
+            <input type="text" formControlName="secondAddressCity" />
+          </label>
+
+          <label>
+            State:
+            <input type="text" formControlName="secondAddressState" />
+          </label>
+
+          <label>
+            Zip Code:
+            <input type="text" formControlName="secondAddressZip" />
+          </label>
+        </div>
+      </div>
+
+      <div class="column">
+        <h2>Contact Info</h2>
+        <div>
+          <label>
+            Personal Email:
+            <input type="text" formControlName="personalEmail" />
+          </label>
+
+          <label>
+            Work Email:
+            <input type="text" formControlName="workEmail" />
+          </label>
+
+          <label>
+            Cellphone:
+            <input type="text" formControlName="cell" />
+          </label>
+
+          <label>
+            Work Phone:
+            <input type="text" formControlName="workPhone" />
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column">
+        <h2>Employment</h2>
+        <div>
+          <label>
+            Work Authorization:
+            <input type="text" formControlName="workAuth" />
+          </label>
+
+          <label>
+            Work Authorization Start Date:
+            <input type="text" formControlName="authStart" />
+          </label>
+
+          <label>
+            Work Authorization End Date:
+            <input type="text" formControlName="authEnd" />
+          </label>
+
+          <label>
+            Employment Start Date:
+            <input type="text" formControlName="empStart" />
+          </label>
+
+          <label>
+            Employment End Date:
+            <input type="text" formControlName="empEnd" />
+          </label>
+
+          <label>
+            Title:
+            <input type="text" formControlName="title" />
+          </label>
+        </div>
+      </div>
+
+      <div class="column">
+        <h2>Emergency Contact</h2>
+        <div>
+          <label>
+            Full Name:
+            <input type="text" formControlName="emergencyFullName" />
+          </label>
+          <label>
+            Phone:
+            <input type="text" formControlName="emergencyPhone" />
+          </label>
+
+          <label>
+            Email Address:
+            <input type="text" formControlName="emergencyAddress" />
+          </label>
+        </div>
+      </div>
+
+      <div class="column">
+        <h2>Document</h2>
+      </div>
+    </div>
+    <button type="submit" [disabled]="!profileForm.valid">Submit</button>
+
+    <div class="row">
+      <div formArrayName="aliases">
+        <div *ngFor="let address of aliases.controls; let i = index">
+          <!-- The repeated alias template -->
+          <!-- <label>
+          Alias:
+          <input type="text" [formControlName]="i">
+        </label> -->
+        </div>
+      </div>
+    </div>
+
+    <!-- </div> -->
+  </form>
+
+  <hr />
+</div>

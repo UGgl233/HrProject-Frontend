@@ -1,0 +1,14 @@
+<br />
+<br />
+<div class="container">
+  <div class="component-container">
+    <h4 *ngIf="approved">
+      Link to Home Page:
+      <a routerLink="/homepage">Home page</a>
+    </h4>
+    <p *ngIf="!approved">
+      There was a problem with your application. Please check your email for
+      further details!
+    </p>
+  </div>
+</div>

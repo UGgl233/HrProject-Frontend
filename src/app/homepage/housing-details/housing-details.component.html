@@ -1,0 +1,38 @@
+<div class="component-container">
+  <div *ngIf="isLoaded; else elseBlock">
+      <div>//wait//
+          <mat-spinner></mat-spinner>
+      </div>
+  </div>
+  <ng-template #elseBlock>
+  <h3>
+      Housing details:
+  </h3>
+  <form [formGroup]="form">
+      <div>
+          <label>Address: </label>
+          <div><input class="houseDetails" type="text" formControlName='houseNumber'></div>
+      </div>
+      <div>
+          <label>Number of Employees Living: </label>
+          <div><input class="houseDetails" type="text" formControlName='mates'></div>
+      </div>    
+  </form>
+  <div>
+      <table>
+          <div>
+              <tr>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Phone</th>
+              </tr>
+              <tr *ngFor="let employee of employees" >
+                  <td>{{employee.FirstName}}</td>
+                  <td>{{employee.LastName}}</td>
+                  <td>{{employee.Phone}}</td>
+              </tr>
+          </div>  
+      </table>
+  </div>
+</ng-template>
+</div>

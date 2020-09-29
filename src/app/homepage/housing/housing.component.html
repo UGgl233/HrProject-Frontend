@@ -1,0 +1,23 @@
+<div class="container">
+  <h1>Housing Page</h1>
+  <br />
+  <br />
+  <nav>
+    <p></p>
+    <a (click)="toggleEditor('housing-details')">
+      Click here, Check Housing Details:
+    </a>
+    <br />
+    <br />
+    <button
+      class="btn btn-primary"
+      (click)="toggleEditor('facility-reporting')"
+    >
+      Facility Reporting
+    </button>
+  </nav>
+  <br />
+  <app-housing-details *ngIf="showNameEditor"></app-housing-details>
+
+  <app-facility-reporting *ngIf="showProfileEditor"></app-facility-reporting>
+</div>
