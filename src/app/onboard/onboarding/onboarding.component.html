@@ -49,7 +49,7 @@
           *ngIf="l_name.invalid && (l_name.dirty || l_name.touched)"
           class="alert alert-danger"
         >
-          <div *ngIf="l_name.errors.required">First Name is required</div>
+          <div *ngIf="l_name.errors.required">Last Name is required</div>
         </div>
       </div>
       <div>
@@ -96,10 +96,10 @@
           />
         </div>
         <div
-          *ngIf="l_name.invalid && (l_name.dirty || l_name.touched)"
+          *ngIf="currentAddress.invalid && (currentAddress.dirty || currentAddress.touched)"
           class="alert alert-danger"
         >
-          <div *ngIf="l_name.errors.required">First Name is required</div>
+          <div *ngIf="currentAddress.errors.required">Current Address is required</div>
         </div>
       </div>
 
@@ -338,26 +338,27 @@
       </div>
       <!-- Emergency Contacts -->
 
-      <div formArrayName="emergency">
-        <h3>Emergency Contacts:</h3>
-        <a style="cursor: pointer" (click)="addEmergency()">Add Contact</a>
-
-        <div *ngFor="let alias of emergency.controls; let i = index">
-          <!-- The repeated emergnecy template -->
-          <label>Contact First Name:</label>
-          <div><input type="text" [formControlName]="e_firstName" /></div>
-
-          <label>Contact Last Name:</label>
-          <div><input type="text" [formControlName]="e_lastName" /></div>
-
-          <label>Contact Phone Number:</label>
-          <div><input type="tel" [formControlName]="e_phoneNum" /></div>
-
-          <label>Contact Email:</label>
-          <div><input type="email" [formControlName]="e_Email" /></div>
-
-          <label>Contact Relationship:</label>
-          <div><input type="text" [formControlName]="e_Relationship" /></div>
+      <div formGroupName="emergency">
+        <h4>Emergency Contacts:</h4>
+        <div>
+          <label for="e_firstName">First Name: </label>
+          <input type="text" name="e_firstName" id="e_firstName" formControlName="e_firstName">
+        </div>
+        <div>
+          <label for="e_lastName">Last Name: </label>
+          <input type="text" name="e_lastName" id="e_lastName" formControlName="e_lastName">
+        </div>
+        <div>
+          <label for="e_phoneNum">Phone Number: </label>
+          <input type="text" name="e_phoneNum" id="e_phoneNum" formControlName="e_phoneNum">
+        </div>
+        <div>
+          <label for="e_Email">Email: </label>
+          <input type="email" name="e_Email" id="e_Email" formControlName="e_Email">
+        </div>
+        <div>
+          <label for="e_Relationship">Relationship: </label>
+          <input type="text" name="e_Relationship" id="e_Relationship" formControlName="e_Relationship">
         </div>
       </div>
 

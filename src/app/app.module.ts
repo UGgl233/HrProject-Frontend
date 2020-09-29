@@ -26,6 +26,7 @@ import { ErrorpageComponent } from './errorpage/errorpage.component';
 import { LogoutComponent } from './homepage/logout/logout.component';
 import { FacilityReportingComponent } from './homepage/facility-reporting/facility-reporting.component';
 import { HousingDetailsComponent } from './homepage/housing-details/housing-details.component';
+import { HireComponent } from './homepage/hire/hire.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { HousingDetailsComponent } from './homepage/housing-details/housing-deta
     ErrorpageComponent,
     LogoutComponent,
     FacilityReportingComponent,
-    HousingDetailsComponent
+    HousingDetailsComponent,
+    HireComponent
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import axios from 'axios';
+
 
 @Component({
   selector: 'app-onboarding',
@@ -10,31 +12,31 @@ import { Router } from '@angular/router';
 })
 export class OnboardingComponent implements OnInit {
 
-  @Input() emailValue;
+  // Change to activedRouter later
+  emailValue: string = "adw";
 
   form: FormGroup;
   type;
   license;
   selectedFile: any;
-  httpClient: any;
-
-  constructor(private fb: FormBuilder, private router: Router,  private http: HttpClient) { }
+  
+  constructor(private fb: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    // this.emailValue = this.activatedRoute.snapshot.params['email'];
     this.form = new FormGroup({
-  
       f_name: new FormControl('',Validators.required),
       l_name: new FormControl('',Validators.required),
       m_name: new FormControl(''),
       p_name: new FormControl(''),
-      avatar: new FormControl(null),
+      avatar: new FormControl(''),
       currentAddress: new FormControl('',Validators.required),
       phone: new FormControl('',Validators.required),
       email: new FormControl(this.emailValue),
       carMake: new FormControl(''),
       carModel: new FormControl(''),
       carColor: new FormControl(''),
-      ssn: new FormControl('',Validators.required),
+      ssn: new FormControl('',Validators.compose([this.ssnValidator, Validators.required])),
       dob: new FormControl('',Validators.compose([this.dobValidator, Validators.required])),
       gender: new FormControl('',Validators.required),
       visa_status: new FormControl(''),
@@ -51,31 +53,19 @@ export class OnboardingComponent implements OnInit {
         referenceEmail: new FormControl(''),
         referenceRelation: new FormControl('')
       }),
-      emergency: this.fb.array([ this.createItem()]),
+      emergency: new FormGroup({
+        e_firstName: new FormControl(''),
+        e_lastName: new FormControl(''),
+        e_phoneNum: new FormControl(''),
+        e_Email: new FormControl(''),
+        e_Relationship: new FormControl('')
+      }),
     });
-    this.form.controls['email'].disable()
+    this.form.controls['email'].disable();
+  
+    // console.log(this.emailValue);
   }
 
-  createItem(){
-    return this.fb.group({
-      e_firstName: '',
-      e_lastName: '',
-      e_phoneNum: '',
-      e_Email: '',
-      e_Relationship: '',
-    });
-  }
-
-  get emergency() {
-    return this.form.get('emergency') as FormArray;
-  }
-
-  addEmergency(): void {
-    this.emergency.push(this.createItem());
-  }
-
-
-  // @TODO: 
   public uploadFile(event) {
     //Select File
     this.selectedFile = event.target.files[0];
@@ -86,20 +76,30 @@ export class OnboardingComponent implements OnInit {
     this.form.get('avatar').updateValueAndValidity()
   }
   
-  onSubmit(mediaItem) {
-    console.log(this.form.value);
+  onSubmit  = async (mediaItem) => {
+    //console.log();
     console.log(mediaItem);
+    let result = await this.sendOnboarding(this.form.value);
+    console.log(result);
+    this.router.navigate(['/digitaldocument'])
+  }
 
-    //Uncomment the following code to post data
-    /* //const uploadImageData = new FormData();
-    // //uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
+
+  sendOnboarding= async (mediaItem): Promise<boolean> =>{
+  let result = false;
+  let rest = '&pName='+mediaItem.p_name+'&curAdd='+mediaItem.currentAddress+'&phone='+mediaItem.phone+'&email='+mediaItem.email+
+  '&ssn='+mediaItem.ssn+'&dob='+mediaItem.dob+'&gender='+mediaItem.gender+'&visa='+mediaItem.visa_status+'&ctz='+mediaItem.citizenship+'&dl='+mediaItem.driverLicense+'&dlExp='+
+  mediaItem.licenseExp+'&dlNum='+mediaItem.licenseNumber+'&refFName='+mediaItem.referenceForm.referenceFirstName+'&refMName='+mediaItem.referenceForm.referenceMiddleName+
+  '&refLName='+mediaItem.referenceForm.referenceLastName+'&refPhone='+mediaItem.referenceForm.referencePhone+'&refEmail='+mediaItem.referenceForm.referenceEmail+'&refRel='+mediaItem.referenceForm.referenceRelation+'&emFName='+
+  mediaItem.emergency.e_firstName+'&emLName='+mediaItem.emergency.e_lastName+'&emPhone='+mediaItem.emergency.e_phoneNum+'&emEmail='+mediaItem.emergency.e_Email+'&emRel='+
+  mediaItem.emergency.e_Relationship+'&carMake='+mediaItem.carMake+'&carModel='+mediaItem.carModel+'&carColor='+mediaItem.carColor;
   
-    // //Make a call to the Spring Boot Application to save the form
-    // this.httpClient.post('http://localhost:8080/image/upload', mediaItem, { observe: 'response' })
-    //   .subscribe((response) => {}
-    //   );*/
-
-    this.router.navigate(['onboard/onboardingdocuments']);
+  let url = 'http://localhost:8080/onboarding?fName='+mediaItem.f_name+'&mName='+mediaItem.m_name+'&lName='+mediaItem.l_name+rest;
+  axios.post(url, {})
+  .then(function (response) {
+    result = (response.data);
+  })
+  return result;
   }
 
   get f_name(){
@@ -141,6 +141,15 @@ export class OnboardingComponent implements OnInit {
       return {
         year: true
       };
+    }
+  }
+  
+  ssnValidator(control: FormControl){
+    if(control.value.trim().length === 9){
+      return null;
+    }
+    else{
+      return {num:true};
     }
   }
 

@@ -49,9 +49,10 @@ export class PreonboardComponent implements OnInit {
 
   nextStep() {
     const redirectUrl = 'onboard/onboarding';
-    this.router.navigate([redirectUrl]);
+    // this.router.navigate([redirectUrl, { queryParams: {email: this.preOnboardForm.get("email").value}}]);
     let param = new HttpParams();
     param = param.append('email', this.preOnboardForm.get("email").value);
+    param = param.append('username', this.preOnboardForm.get("username").value);
     param = param.append('password', this.preOnboardForm.get("password").value);
     param = param.append('registrationToken', this.preOnboardForm.get("registrationToken").value);
 

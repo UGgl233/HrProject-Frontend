@@ -3,6 +3,7 @@ import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AppService } from 'src/app/app-service.service';
 import { OPT } from 'src/app/models/opt';
 import { PersonalDocument } from 'src/app/models/personalDocument';
 import { FileService } from 'src/app/services/file.service';
@@ -43,7 +44,8 @@ export class VisastatusComponent implements OnInit {
     private visaStatusService: VisaStatusService,
     private fileService: FileService,
     private datePipe: DatePipe,
-    private router: Router
+    private router: Router,
+    private appService: AppService,
   ) { }
 
   ngOnInit(): void {
@@ -142,7 +144,7 @@ export class VisastatusComponent implements OnInit {
     this.visa = visa;
     visa.visaType = text;
     visa.isActive = true;
-    visa.createUser = 'test111';
+    visa.createUser = this.appService.getUserName();
 
     var date = this.getCurrentDateInApiFormat();
     visa.modificationDate = date.toString();
@@ -156,7 +158,7 @@ export class VisastatusComponent implements OnInit {
   onSaveDocument() {
     var document = new PersonalDocument();
     document.path = this.selectedFiles.item(0).name;
-    document.createBy = 'test111';
+    document.createBy = this.appService.getUserName();
 
     var date = this.getCurrentDateInApiFormat();
     document.createDate = date;
