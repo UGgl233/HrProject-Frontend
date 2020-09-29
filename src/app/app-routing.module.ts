@@ -4,6 +4,7 @@ import { AuthGuard } from './auth-guard.service';
 import { ErrorpageComponent } from './errorpage/errorpage.component';
 import { HireComponent } from './homepage/hire/hire.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { HousingManagementComponent } from './homepage/housing-management/housing-management.component';
 import { HousingComponent } from './homepage/housing/housing.component';
 import { LogoutComponent } from './homepage/logout/logout.component';
 import { PersonalinfoComponent } from './homepage/personalinfo/personalinfo.component';
@@ -43,6 +44,10 @@ const appRoutes: Routes = [
       {
         path: 'hire',
         component: HireComponent,
+      },
+      {
+        path: 'housingmanagement',
+        component: HousingManagementComponent,
       },
       {
         path: 'logout',

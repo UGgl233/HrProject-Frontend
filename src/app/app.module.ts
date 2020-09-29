@@ -28,6 +28,7 @@ import { FacilityReportingComponent } from './homepage/facility-reporting/facili
 import { HousingDetailsComponent } from './homepage/housing-details/housing-details.component';
 import { HireComponent } from './homepage/hire/hire.component';
 import { CommonModule } from '@angular/common';
+import { HousingManagementComponent } from './homepage/housing-management/housing-management.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { CommonModule } from '@angular/common';
     LogoutComponent,
     FacilityReportingComponent,
     HousingDetailsComponent,
-    HireComponent
+    HireComponent,
+    HousingManagementComponent
   ],
   imports: [
     BrowserModule,
