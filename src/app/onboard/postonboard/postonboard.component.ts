@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class PostonboardComponent implements OnInit {
 
   //value of whether HR accepts or rejects an application
-  approved: boolean = true; 
+  approved: boolean = false; 
 
   constructor() { }
 
