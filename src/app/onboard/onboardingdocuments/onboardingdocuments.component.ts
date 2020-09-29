@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import axios from 'axios';
 
 @Component({
   selector: 'app-onboardingdocuments',
@@ -11,15 +11,13 @@ import { HttpClient } from '@angular/common/http';
 export class OnboardingdocumentsComponent implements OnInit {
 
   form: FormGroup;
-  retrieveResonse: Object;
-  base64Data: any;
-  retrievedImage: string;
-  selectedFile: any;
-  
-  
-  constructor(private fb: FormBuilder, private router: Router,  private http: HttpClient) { }
+  userId: string;
+  date: String;
+  myDate = new Date();
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+    this.userId = (localStorage.getItem("userId"));
     this.form = new FormGroup({
       document1: new FormControl(''),
       document2: new FormControl(''),
@@ -27,10 +25,16 @@ export class OnboardingdocumentsComponent implements OnInit {
     });
   }
 
-  onSubmit(mediaItem) {
+  async onSubmit(mediaItem) {
     console.log(mediaItem);
-    
-    this.router.navigate(['onboard/postonboard'])
+    this.date = this.myDate.getFullYear()+"-"+(this.myDate.getMonth()+1)+"-"+(this.myDate.getDate());
+    let result = await this.getRequest();
+    if(result !== false){
+      this.router.navigate(['onboard/postonboard']);
+    }
+    else{
+      alert("Error Submitting Form!");
+    }
   }
 
     //Gets called when the user clicks on retieve image button to get the image from back end
@@ -39,4 +43,13 @@ export class OnboardingdocumentsComponent implements OnInit {
       console.log("Getting Doc")
      
     }
+
+    getRequest = async():Promise<boolean>=>
+    axios.get('http://localhost:8080/application?userId='+parseInt(this.userId)+'&date='+this.date)
+      .then(function (response) {
+        return response.data;
+      })
+      .catch(function (error) {
+       return (error);
+      });
 }
