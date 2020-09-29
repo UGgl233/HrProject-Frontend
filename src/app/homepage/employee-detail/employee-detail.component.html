@@ -1,0 +1,40 @@
+<div class="container">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Work Authorization</th>
+        <th scope="col">Modification Date</th>
+        <th scope="col">Day Left</th>
+        <th scope="col">Action Required</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td scope="row">{{ employee.createUser }}</td>
+        <td>{{ employee.visaType }}</td>
+        <td>{{ employee.modificationDate }}</td>
+        <td (click)="getDaysLeft()">{{ dayLeft }}</td>
+        <td><button class="btn btn-primary">send notification</button></td>
+      </tr>
+      <tr>
+        <th scope="row">Details</th>
+        <td colspan="2">
+          <ul>
+            <li>{{ employee.createUser }}</li>
+            <li>{{ employee.visaType }}</li>
+            <li>{{ employee.modificationDate }}</li>
+          </ul>
+        </td>
+        <!-- *ngFor="let file of fileInfos | async" -->
+        <td colspan="2">
+          <!-- <a href="http://localhost:8080/api/file/{{ file }}">{{ file }}</a> -->
+          <ul *ngFor="let file of fileName">
+            <li>{{ file }}</li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button class="btn btn-primary" (click)="backToList()">back to list</button>
+</div>

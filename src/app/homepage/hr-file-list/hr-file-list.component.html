@@ -1,0 +1,42 @@
+<div class="container">
+  <h2 class="card-header">List of Files for HR</h2>
+  <!-- <ul
+    class="list-group list-group-flush"
+    *ngFor="let file of fileInfos | async"
+  >
+    <li class="list-group-item">
+      <a href="http://localhost:8080/api/file/{{ file }}">
+        {{ file }}
+      </a>
+    </li>
+  </ul> -->
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Work Authorization</th>
+
+        <th scope="col">Expiration Date</th>
+        <th scope="col">Day Left</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let person of personalDocument">
+        <td>
+          <a
+            routerLink="/Details/{{ person.createUser }}"
+            routerLinkActive="active-link"
+            (click)="onSelect(person)"
+            >{{ person.createUser }}</a
+          >
+        </td>
+        <td>{{ person.visaType }}</td>
+        <td>{{ expiration }}</td>
+        <td>Otto</td>
+        <td><button class="btn btn-primary">Send Notification</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

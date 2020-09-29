@@ -29,6 +29,8 @@ import { HousingDetailsComponent } from './homepage/housing-details/housing-deta
 import { HireComponent } from './homepage/hire/hire.component';
 import { CommonModule } from '@angular/common';
 import { HousingManagementComponent } from './homepage/housing-management/housing-management.component';
+import { EmployeeDetailComponent } from './homepage/employee-detail/employee-detail.component';
+import { HrFileListComponent } from './homepage/hr-file-list/hr-file-list.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { HousingManagementComponent } from './homepage/housing-management/housin
     FacilityReportingComponent,
     HousingDetailsComponent,
     HireComponent,
-    HousingManagementComponent
+    HousingManagementComponent,
+    EmployeeDetailComponent,
+    HrFileListComponent
   ],
   imports: [
     BrowserModule,

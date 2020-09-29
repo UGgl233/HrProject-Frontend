@@ -6,6 +6,7 @@ import { HireComponent } from './homepage/hire/hire.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { HousingManagementComponent } from './homepage/housing-management/housing-management.component';
 import { HousingComponent } from './homepage/housing/housing.component';
+import { HrFileListComponent } from './homepage/hr-file-list/hr-file-list.component';
 import { LogoutComponent } from './homepage/logout/logout.component';
 import { PersonalinfoComponent } from './homepage/personalinfo/personalinfo.component';
 import { DownloadFileComponent } from './homepage/visastatus/download-file/download-file.component';
@@ -48,6 +49,10 @@ const appRoutes: Routes = [
       {
         path: 'housingmanagement',
         component: HousingManagementComponent,
+      },
+      {
+        path: 'hrfilelist',
+        component: HrFileListComponent,
       },
       {
         path: 'logout',
