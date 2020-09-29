@@ -15,7 +15,7 @@ export class OnboardingdocumentsComponent implements OnInit {
   base64Data: any;
   retrievedImage: string;
   selectedFile: any;
-  httpClient: any;
+  
   
   constructor(private fb: FormBuilder, private router: Router,  private http: HttpClient) { }
 
@@ -29,9 +29,7 @@ export class OnboardingdocumentsComponent implements OnInit {
 
   onSubmit(mediaItem) {
     console.log(mediaItem);
-    //this.httpClient.post('http://localhost:8080/image/upload', mediaItem, { observe: 'response' })
-    //   .subscribe((response) => {}
-    //   );
+    
     this.router.navigate(['onboard/postonboard'])
   }
 
@@ -39,13 +37,6 @@ export class OnboardingdocumentsComponent implements OnInit {
     getImage(document) {
       //Make a call to Sprinf Boot to get the Image Bytes.
       console.log("Getting Doc")
-      // this.httpClient.get('http://localhost:8080/image/get/' + document)
-      //   .subscribe(
-      //     res => {
-      //       this.retrieveResonse = res;
-      //       this.base64Data = this.retrieveResonse.picByte;
-      //       this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
-      //     }
-      //   );
+     
     }
 }
