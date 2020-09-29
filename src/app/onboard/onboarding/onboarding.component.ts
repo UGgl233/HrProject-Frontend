@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import axios from 'axios';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -13,17 +14,31 @@ import axios from 'axios';
 export class OnboardingComponent implements OnInit {
 
   // Change to activedRouter later
-  emailValue: string = "adw";
+  emailValue: string;
 
   form: FormGroup;
-  type;
-  license;
+  type: any;
+  license: any;
   selectedFile: any;
+  sub: any;
   
   constructor(private fb: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.sub = this.activatedRoute
+      .queryParams
+      .subscribe(params => {
+        // Defaults to 0 if no query param provided.
+        this.emailValue = params['email'];
+        console.log(this.emailValue);
+      });
     // this.emailValue = this.activatedRoute.snapshot.params['email'];
+    // this.activatedRoute.params.subscribe(
+    //   (params)=>{
+    //        this.emailValue=params["email"];
+    //        console.log(this.emailValue);
+    //    }
+    //  )
     this.form = new FormGroup({
       f_name: new FormControl('',Validators.required),
       l_name: new FormControl('',Validators.required),
@@ -81,13 +96,13 @@ export class OnboardingComponent implements OnInit {
     console.log(mediaItem);
     let result = await this.sendOnboarding(this.form.value);
     console.log(result);
-    this.router.navigate(['/digitaldocument'])
+    this.router.navigate(['onboard/onboardingdocuments'])
   }
 
 
   sendOnboarding= async (mediaItem): Promise<boolean> =>{
   let result = false;
-  let rest = '&pName='+mediaItem.p_name+'&curAdd='+mediaItem.currentAddress+'&phone='+mediaItem.phone+'&email='+mediaItem.email+
+  let rest = '&pName='+mediaItem.p_name+'&curAdd='+mediaItem.currentAddress+'&phone='+mediaItem.phone+'&email='+this.emailValue+
   '&ssn='+mediaItem.ssn+'&dob='+mediaItem.dob+'&gender='+mediaItem.gender+'&visa='+mediaItem.visa_status+'&ctz='+mediaItem.citizenship+'&dl='+mediaItem.driverLicense+'&dlExp='+
   mediaItem.licenseExp+'&dlNum='+mediaItem.licenseNumber+'&refFName='+mediaItem.referenceForm.referenceFirstName+'&refMName='+mediaItem.referenceForm.referenceMiddleName+
   '&refLName='+mediaItem.referenceForm.referenceLastName+'&refPhone='+mediaItem.referenceForm.referencePhone+'&refEmail='+mediaItem.referenceForm.referenceEmail+'&refRel='+mediaItem.referenceForm.referenceRelation+'&emFName='+

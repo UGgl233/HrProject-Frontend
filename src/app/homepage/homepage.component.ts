@@ -10,10 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomepageComponent implements OnInit {
   username: string;
+  isHr: boolean;
 
   constructor() {}
 
   ngOnInit(): void {
     this.username = localStorage.getItem('username');
+    if (localStorage.getItem('isHr')) {
+      this.isHr = true;
+    } else {
+      this.isHr = false;
+    }
   }
 }

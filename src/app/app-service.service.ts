@@ -15,6 +15,7 @@ export class AppService {
   logout(){
     localStorage.removeItem('userId');
     localStorage.removeItem('username');
+    localStorage.removeItem('isHr');
   }
 
   getUserId() {
@@ -23,5 +24,9 @@ export class AppService {
 
   getUserName() {
     return localStorage.getItem('username');
+  }
+
+  setHr() {
+    localStorage.setItem('isHr', 'true');
   }
 }

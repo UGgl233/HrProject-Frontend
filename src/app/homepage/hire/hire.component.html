@@ -1,1 +1,25 @@
-<p>hire works!</p>
+<div class="container">
+  <form [formGroup]="hireForm" (ngSubmit)="createRegistrationToken()">
+    <div class="form-group">
+      <label>User email:</label>
+      <input type="text" class="form-control" formControlName="email" />
+    </div>
+    <button type="submit" class="btn btn-primary">
+      Create a registration token
+    </button>
+    <a *ngIf="tokenGenerateFlag">Notified</a>
+  </form>
+  <p>Ongoing Application</p> 
+  <button (click)="refreshData()" class="btn btn-primary">
+    Refresh the ongoing application
+  </button>
+  <div class="container" *ngIf="findApplicationStatus" id="down">
+    <p>Hello: {{fullname}}</p>
+    <button (click)="approve()" class="btn btn-primary">
+      Approve Applicaton
+    </button>
+    <button (click)="reject()" class="btn btn-primary">
+      Reject Applicaton
+    </button>
+  </div>
+</div>

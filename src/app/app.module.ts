@@ -27,6 +27,7 @@ import { LogoutComponent } from './homepage/logout/logout.component';
 import { FacilityReportingComponent } from './homepage/facility-reporting/facility-reporting.component';
 import { HousingDetailsComponent } from './homepage/housing-details/housing-details.component';
 import { HireComponent } from './homepage/hire/hire.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { HireComponent } from './homepage/hire/hire.component';
     MatDatepickerModule,
     MatNativeDateModule,
     HttpClientModule,
+    CommonModule,
   ],
   providers: [AppService, AuthGuard],
   bootstrap: [AppComponent]

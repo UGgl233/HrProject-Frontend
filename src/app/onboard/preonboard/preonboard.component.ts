@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AppService } from 'src/app/app-service.service';
 
 @Component({
   selector: 'app-preonboard',
@@ -17,7 +18,7 @@ export class PreonboardComponent implements OnInit {
   isNotValidTokenAndPassword: boolean = false;
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute,
-    private router: Router, private http: HttpClient) { }
+    private router: Router, private http: HttpClient, private appService: AppService) { }
 
   ngOnInit(): void {
     this.preOnboardForm = new FormGroup({
@@ -49,17 +50,19 @@ export class PreonboardComponent implements OnInit {
 
   nextStep() {
     const redirectUrl = 'onboard/onboarding';
-    // this.router.navigate([redirectUrl, { queryParams: {email: this.preOnboardForm.get("email").value}}]);
     let param = new HttpParams();
     param = param.append('email', this.preOnboardForm.get("email").value);
     param = param.append('username', this.preOnboardForm.get("username").value);
     param = param.append('password', this.preOnboardForm.get("password").value);
     param = param.append('registrationToken', this.preOnboardForm.get("registrationToken").value);
+    // @TODO: Add LocalStorage.. .
 
     let obs1 = this.http.get<any>('http://localhost:8080/registration/authenticate', {params: param});
-    obs1.subscribe((response) => {
-      if (response == true) {
+    obs1.subscribe((response: any) => {
+      if (response.status == true) {
         console.log("Success");
+        this.router.navigate([redirectUrl], { queryParams: {email: this.preOnboardForm.get("email").value}});
+        this.appService.login(response.userId, response.username);
       } else {
         this.isNotValidTokenAndPassword = true;
       }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './auth-guard.service';
 import { ErrorpageComponent } from './errorpage/errorpage.component';
+import { HireComponent } from './homepage/hire/hire.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { HousingComponent } from './homepage/housing/housing.component';
 import { LogoutComponent } from './homepage/logout/logout.component';
@@ -38,6 +39,10 @@ const appRoutes: Routes = [
       {
         path: 'housing',
         component: HousingComponent,
+      },
+      {
+        path: 'hire',
+        component: HireComponent,
       },
       {
         path: 'logout',

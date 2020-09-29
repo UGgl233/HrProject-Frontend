@@ -45,7 +45,7 @@ export class OnboardingdocumentsComponent implements OnInit {
     }
 
     getRequest = async():Promise<boolean>=>
-    axios.get('http://localhost:8080/application?userId='+parseInt(this.userId)+'&date='+this.date)
+    axios.post('http://localhost:8080/application?userId='+parseInt(this.userId)+'&date='+this.date)
       .then(function (response) {
         return response.data;
       })

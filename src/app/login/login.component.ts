@@ -51,6 +51,10 @@ export class LoginComponent implements OnInit {
         this.appService.login(response.userId, response.username);
         const redirectUrl = '/homepage/personalinfo';
         this.router.navigate([redirectUrl]);
+        if (response.role == "hr") {
+          this.appService.setHr();
+          console.log("is hr");
+        }
       } else {
         this.invalidLogin = true;
       }
