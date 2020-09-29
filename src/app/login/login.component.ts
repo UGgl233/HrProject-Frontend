@@ -48,9 +48,9 @@ export class LoginComponent implements OnInit {
     obs1.subscribe((response : any) => {
       console.log(response);
       if (response.status == true) {
-        this.appService.login(response.userId);
-        const redirectUrl = '/homepage';
-        this.router.navigate([redirectUrl], { queryParams: { username: this.username } });
+        this.appService.login(response.userId, response.username);
+        const redirectUrl = '/homepage/personalinfo';
+        this.router.navigate([redirectUrl]);
       } else {
         this.invalidLogin = true;
       }

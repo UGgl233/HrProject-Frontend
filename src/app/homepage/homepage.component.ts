@@ -9,11 +9,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./homepage.component.css'],
 })
 export class HomepageComponent implements OnInit {
-  userId: string;
+  username: string;
 
   constructor() {}
 
   ngOnInit(): void {
-    this.userId = localStorage.getItem('userId');
+    this.username = localStorage.getItem('username');
   }
 }

@@ -6,7 +6,7 @@ import { AppService } from './app-service.service';
 export class AuthGuard implements CanActivate {
   constructor(public service: AppService, public router: Router) {}
   canActivate(): boolean {
-    if (!this.service.getUserId()) {
+    if (!this.service.getUserId() && !this.service.getUserName()) {
       alert('Not signin yet, redirecting');
       this.router.navigate(['login']);
       return false;
